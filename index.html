@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Jeopardy! Clue Search</title>
+    <link rel="stylesheet" href="styles/style.css">
+
+</head>
+<body>
+    <div class="container">
+        <h1>Jeopardy! Clue Search</h1>
+
+        <div class="search-container">
+            <img src="images/search-icon.svg" id="search-btn" alt="search button">
+            <input type= "text" id="search" placeholder="" onkeypress="return searchKeyPress(event);"/>
+            <p id="tip">Hit enter to search</p>
+        </div>
+        
+        <div id="question"></div>
+        <div id="answer"></div>
+        
+    </div>
+
+    <script src="scripts/main.js"></script>
+</body>
+</html>
