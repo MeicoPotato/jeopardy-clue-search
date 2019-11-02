@@ -2,70 +2,87 @@ const searchBtn = document.getElementById('search-btn');
 const tip = document.getElementById('tip');
 const search = document.getElementById('search');
 
-searchBtn.addEventListener('click', () => {
+function expandBar() {
     search.style.width = '80%';
     search.style.paddingLeft = '60px';
     search.style.cursor = 'text';
     search.focus();
+}
 
-    var i = 0;
-    var message = 'Search from 150,000+ clues';
+function typeWriter() {
+    let message = 'Search from over 150,000 clues';
+    let msgLength = search.getAttribute('placeholder').length;
+    let msg = search.getAttribute('placeholder') + message.charAt(msgLength);
 
-    function typeWriter() {
-        if (i < message.length) {
-            msg = search.getAttribute('placeholder') + message.charAt(i);
-            search.setAttribute('placeholder', msg)
-            i++;
-            setTimeout(typeWriter, 50);
-        }
+    if (msgLength <= message.length) {
+        search.setAttribute('placeholder', msg);
+        setTimeout(typeWriter, 50);
     }
-
+}
+searchBtn.addEventListener('click', () => {
+    expandBar();
     typeWriter();
-})
+});
 
 search.addEventListener('keydown', () => {
     tip.style.visibility = 'visible';
     tip.style.opacity = '1';
 })
 
-function searchKeyPress(e) {
-    if (e.keyCode == 13) {
-        for (var i = 0; i <= 500; i++) {
-            var userInput = document.getElementById("search");
-            displayClues(userInput.value, i);
-        }
+function handleKeyPress(key) {
+    let userInput;
 
+    if (key.keyCode == 13) {
+        userInput = document.getElementById('search');
+        buildDatabase();
     }
 }
 
-function displayClues(input, i) {
-    fetch('http://jservice.io/api/clues')
-        .then(
-            function (response) {
-                if (response.status !== 200) {
-                    console.log('Looks like there was a problem. Status Code: ' +
-                        response.status);
-                    return;
+function buildDatabase() {
+    const app = document.getElementById('scrolling-wrapper'); 
+    const container = document.createElement('div');
+
+    container.setAttribute('class', 'container');
+    app.appendChild(container);
+    var numOffset = 0;
+    
+    while (numOffset <= 1000) {
+        var request = new XMLHttpRequest();
+        request.open('GET', `http://jservice.io/api/clues/?offset=${numOffset}`, true)
+        request.onload = function() {
+          // Begin accessing JSON data here
+          var data = JSON.parse(this.response);
+          if (request.status >= 200 && request.status < 400) {
+            data.forEach(clue => {
+                if (clue.question == "") {
+                    console.log("hi");
+                } else {
+                    const card = document.createElement('div');
+                    card.setAttribute('class', 'card');
+              
+                    const quest = document.createElement('h1');
+                    quest.id='question';
+                    quest.textContent = clue.question;
+              
+                    const ans = document.createElement('p');
+                    ans.id = 'answer';
+                    ans.textContent = clue.answer;
+              
+                    container.appendChild(card);
+                    card.appendChild(quest);
+                    card.appendChild(ans);
                 }
-
-                // Examine the text in the response
-
-                response.json().then(function (data) {
-                    if (data[i].question.toLowerCase().includes(input)) {
-                        const answer = data[i].answer;
-                        const question = data[i].question;
-
-                        document.getElementById("question").innerHTML = question;
-                        document.getElementById("answer").innerHTML = answer;
-                    }
-
-
-                });
-
-            }
-        )
-        .catch(function (err) {
-            console.log('Fetch Error :-S', err);
-        });
-
+    
+            })
+          } else {
+            const errorMessage = document.createElement('marquee');
+            errorMessage.textContent = 'Something went wrong.';
+            app.appendChild(errorMessage);
+          }
+        }
+        
+        request.send();
+        numOffset = numOffset + 50;
+    }
+    
 }
