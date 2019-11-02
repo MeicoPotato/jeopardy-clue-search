@@ -1,35 +1,105 @@
-@import url(https://fonts.googleapis.com/css?family=Barlow&display=swap);
-body {
-  height: 100vh;
-  margin: 0;
-  display: -ms-grid;
-  display: grid;
-  -webkit-box-pack: center;
-      -ms-flex-pack: center;
-          justify-content: center;
-  font-family: "Barlow";
-  background: -webkit-gradient(linear, left top, left bottom, from(#0000ff), to(#9900cc));
-  background: linear-gradient(to bottom, #0000ff 0%, #9900cc 100%);
+@import url("https://fonts.googleapis.com/css?family=Bangers|News+Cycle&display=swap");
+* {
+  -webkit-box-sizing: border-box;
+          box-sizing: border-box;
 }
 
-h1 {
-  color: #FFC300;
-  font-size: 3.5em;
-}
-
-.container {
+.header-container {
   text-align: center;
 }
 
+html {
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  line-height: 1.6;
+  height: 100vh;
+  background: -webkit-gradient(linear, left top, left bottom, from(#781F97), to(#ED4FE1));
+  background: linear-gradient(to bottom, #781F97 0%, #ED4FE1 100%);
+}
+
+#scrolling-wrapper {
+  margin: 0 auto;
+}
+
+h1 {
+  text-align: center;
+  padding: 1.5rem 2.5rem;
+  margin: 0 0 2rem 0;
+  font-size: 1.5rem;
+  color: #FFFFFF;
+}
+
+p {
+  text-align: center;
+  padding: 0 2.5rem 2.5rem;
+  margin: 0;
+}
+
+.container {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -ms-flex-wrap: wrap;
+      flex-wrap: wrap;
+}
+
+.card {
+  font-family: 'News Cycle';
+  margin: 1rem;
+  background: #031174;
+  -webkit-box-shadow: 2px 4px 25px rgba(0, 0, 0, 0.1);
+          box-shadow: 2px 4px 25px rgba(0, 0, 0, 0.1);
+  border-radius: 3px;
+  -webkit-transition: all .2s linear;
+  transition: all .2s linear;
+  overflow-y: scroll;
+}
+
+.card:hover {
+  -webkit-box-shadow: 2px 8px 45px #DD9C4A;
+          box-shadow: 2px 8px 45px #DD9C4A;
+  -webkit-transform: translate3D(0, -2px, 0);
+          transform: translate3D(0, -2px, 0);
+}
+
+@media screen and (min-width: 600px) {
+  .card {
+    -webkit-box-flex: 1;
+        -ms-flex: 1 1 calc(50% - 2rem);
+            flex: 1 1 calc(50% - 2rem);
+  }
+}
+
+@media screen and (min-width: 900px) {
+  .card {
+    -webkit-box-flex: 1;
+        -ms-flex: 1 1 calc(20% - 3rem);
+            flex: 1 1 calc(20% - 3rem);
+  }
+}
+
+/*
+@media screen and (min-width: 900px) {
+    .card {
+      flex: 1 1 calc(33% - 2rem);
+    }
+  }
+  */
+#title {
+  font-family: 'Bangers';
+  color: #DD9C4A;
+  font-size: 3.5em;
+}
+
 input {
-  font-family: "Barlow";
-  background: #FFC300;
+  font-family: 'News Cycle';
+  background: #DD9C4A;
   width: 20px;
   height: 20px;
   padding: 20px;
   border-radius: 30px;
   border: none;
-  color: #060CE9;
+  color: #031174;
   cursor: pointer;
   -webkit-transition: width 1s ease;
   transition: width 1s ease;
@@ -43,14 +113,14 @@ input:focus {
 img {
   width: 22px;
   height: 22px;
-  margin: 18px 0 0 18px;
+  margin: 10px 0 0 -32px;
   position: absolute;
-  z-index: 1;
   cursor: pointer;
 }
 
-p {
-  color: #FFC300;
+#tip {
+  color: #031174;
+  font-family: 'News Cycle';
   font-size: .8em;
   text-align: left;
   margin-left: 50px;
@@ -64,35 +134,46 @@ p {
 .search-container:before {
   content: "";
   border-radius: 50%;
-  width: 51px;
-  height: 51px;
-  border: 4px solid #FFC300;
+  width: 30px;
+  height: 30px;
+  border: 4px solid #DD9C4A;
   position: absolute;
-  -webkit-animation: grow 1s 3;
-          animation: grow 1s 3;
+  z-index: -1;
+  -webkit-animation: stretch 1.0s 5;
+          animation: stretch 1.0s 5;
 }
 
-@-webkit-keyframes grow {
-  from {
+@-webkit-keyframes stretch {
+  0% {
     -webkit-transform: scale(1);
             transform: scale(1);
   }
-  to {
-    -webkit-transform: scale(1.5);
-            transform: scale(1.5);
+  100% {
+    -webkit-transform: scale(2);
+            transform: scale(2);
     opacity: 0;
   }
 }
 
-@keyframes grow {
-  from {
+@keyframes stretch {
+  0% {
     -webkit-transform: scale(1);
             transform: scale(1);
   }
-  to {
-    -webkit-transform: scale(1.5);
-            transform: scale(1.5);
+  100% {
+    -webkit-transform: scale(2);
+            transform: scale(2);
     opacity: 0;
   }
+}
+
+#question {
+  font-size: 1.5vw;
+  color: #FFFFFF;
+  text-transform: uppercase;
+}
+
+#answer {
+  color: #DD9C4A;
 }
 /*# sourceMappingURL=style.css.map */
