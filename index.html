@@ -8,20 +8,17 @@
 
 </head>
 <body>
-    <div class="container">
-        <h1>Jeopardy! Clue Search</h1>
-
+    <div class="header-container">
+        <h1 id="title">Jeopardy! Clue Search</h1>
         <div class="search-container">
+            <input type= "text" id="search" placeholder="" onkeypress="handleKeyPress(event);"/>
             <img src="images/search-icon.svg" id="search-btn" alt="search button">
-            <input type= "text" id="search" placeholder="" onkeypress="return searchKeyPress(event);"/>
             <p id="tip">Hit enter to search</p>
         </div>
-        
-        <div id="question"></div>
-        <div id="answer"></div>
-        
-    </div>
+        <div id="scrolling-wrapper">
 
-    <script src="scripts/main.js"></script>
+        </div>
+<script src="scripts/main.js"></script>
+</div>
 </body>
 </html>
