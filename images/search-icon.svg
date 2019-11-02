@@ -1,9 +1,8 @@
-<svg width="35" height="30" xmlns="http://www.w3.org/2000/svg" xmlns:svg="http://www.w3.org/2000/svg">
+<svg width="640" height="480" xmlns="http://www.w3.org/2000/svg" xmlns:svg="http://www.w3.org/2000/svg">
  <!-- Created with SVG-edit - http://svg-edit.googlecode.com/ -->
- <title>search-icon</title>
  <g>
-  <title>Layer 1</title>
-  <circle stroke="#060CE9" id="svg_6" r="0.44495" cy="18.37695" cx="19.91101" stroke-linecap="null" stroke-linejoin="null" stroke-dasharray="null" stroke-width="17" fill="none"/>
-  <rect transform="rotate(-45.90221405029297 28.85442924499513,26.60845947265626) " stroke="#060CE9" id="svg_7" height="8.276" width="0.97888" y="22.47046" x="28.36499" stroke-linecap="null" stroke-linejoin="null" stroke-dasharray="null" fill="#0000ff"/>
+  <title>Search Button</title>
+  <circle fill-opacity="0" id="lens" r="150.07246" cy="211.7431" cx="320.00002" stroke-linecap="null" stroke-linejoin="null" stroke-dasharray="null" stroke-width="15" stroke="#000000" fill="#000000"/>
+  <rect fill-opacity="0" stroke="#000000" transform="rotate(-45.90510940551758 506.16406249999994,377.98010253906244) " id="handle" height="195.55656" width="55.03406" y="280.20182" x="478.64704" stroke-linecap="null" stroke-linejoin="null" stroke-dasharray="null" stroke-width="15" fill="#000000"/>
  </g>
 </svg>
