@@ -1,79 +1,52 @@
-const searchBtn = document.getElementById("search-btn");
-const tip = document.getElementById("tip");
-const search = document.getElementById("search");
-let clues = new Array();
+let test = require('ahocorasick.js');
 
-//fetchURLs();
+let clues = AhoCorasick.prototype.search;
+
 randomCards();
 buildDatabase();
 
-function expandBar() {
-    search.style.width = "50%";
-    search.style.paddingLeft = "60px";
-    search.style.cursor = "text";
-    search.focus();
+function clickEnter() {
+    let searchInput = document.getElementById("search-bar").value;
+    deleteCards();
+    searchQuestion(searchInput);
 }
-
-function typeWriter() {
-    let message = "Search from over 150,000 clues";
-    let msgLength = search.getAttribute("placeholder").length;
-    let msg = search.getAttribute("placeholder") + message.charAt(msgLength);
-
-    if (msgLength <= message.length) {
-        search.setAttribute("placeholder", msg);
-        setTimeout(typeWriter, 50);
-    }
-}
-searchBtn.addEventListener("click", () => {
-    expandBar();
-    typeWriter();
-});
-
-search.addEventListener("keydown", () => {
-    tip.style.visibility = "visible";
-    tip.style.opacity = "1";
-});
 
 function handleKeyPress(key) {
-    let userInput;
-
     if (key.keyCode == 13) {
-        userInput = document.getElementById("search").value;
+        let searchInput = document.getElementById("search-bar").value;
+        let categoryInput = document.getElementById("category-search").value;
+        let minDateInput = document.getElementById("min-date").value;
+        let maxDateInput = document.getElementById("max-date").value;
+        let difficultyInput = document.getElementById("difficulty").value;
+
+        let userInput = {
+            search : searchInput,
+            category : categoryInput,
+            minDate : minDateInput,
+            maxDate : maxDateInput,
+            difficulty : difficultyInput
+        }
+
         deleteCards();
         searchQuestion(userInput);
     }
 }
 
-async function buildDatabase() {
-    for (let offset = 0; offset <= 156800; offset += 100) {
-        getClues(offset).then(offsetData => {
-            offsetData.forEach(clue => {
-                clues.push(clue);
-            });
-        });
-    }
-}
-
-async function getClues(offset) {
-    let response = await fetch(`http://jservice.io/api/clues/?offset=${offset}`);
-    let data = await response.json();
-    return data;
-}
-
-async function searchQuestion(userInput) {
-    let formattedInput = userInput.toLowerCase().replace(/[^a-zA-Z0-9]/g, "");
+async function searchQuestion(userInputObj) {
+    let formattedSearchInput = userInput.search.toLowerCase().replace(/[^a-zA-Z0-9]/g, "");
+    let formattedCategoryInput = userInput.category.toLowerCase().replace(/[^a-zA-Z0-9]/g, "");
+    let formattedMinDateInput = userInput.minDate.replace(/[^a-zA-Z0-9]/g, "");
+    let formattedMaxDateInput = userInput.maxDate.replace(/[^a-zA-Z0-9]/g, "");
+    let formattedDifficultyInput = userInput.difficulty;
 
     for (let clue of clues) {
-        if (
-            clue.question
-                .toLowerCase()
-                .replace(/[^a-zA-Z0-9]/g, "")
-                .includes(formattedInput)
-        ) {
+        if (clue.question.toLowerCase().replace(/[^a-zA-Z0-9]/g, "")
+                .includes(formattedSearchInput)) {
             addCard(clue);
         }
     }
 }
+
 
 function randomCards() {
     getRandomClues().then(data => {
@@ -152,3 +125,4 @@ function deleteCards() {
 }
 
 //http://jservice.io/api/clues/?min_date=1990-01-01&max_date=2016-01-01
+//jeopardy values: 100, 200, 400, 600, 800, 1000

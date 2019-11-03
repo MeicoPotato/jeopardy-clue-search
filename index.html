@@ -1,37 +1,58 @@
 <!DOCTYPE html>
 <html lang="en" dir="ltr">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Jeopardy! Clue Search</title>
     <link rel="stylesheet" href="styles/style.css">
 </head>
+
 <body>
-    <div class="header-container">
-        <h1 id="title">Jeopardy! Clue Search</h1>
-        <div class="search-container">
-            <div class="input-group">
-                <input type="text" class="form-control input-sm" value="test1" />
-                <span class="input-group-btn" style="width:0px;"></span>
-                <input type="text" class="form-control input-sm" value="test2" style="margin-left:-1px" />
-                <span class="input-group-btn" style="width:0px;"></span>
-                <input type="text" class="form-control input-sm" value="test2" style="margin-left:-2px" />
+    <h1 id="title">Jeopardy! Clue Search</h1>
+    <div class="search-container">
+        <div class="input-group">
+            <input type="text" id="search-bar" placeholder="Search from over 150,000 clues"
+                onkeypress="handleKeyPress(event);" />
+            <img src="images/search-icon.svg" id="search-btn" alt="search button" onclick="clickEnter();">
+            <span class="input-group-btn"></span>
+            <input type="text" id="category-search" placeholder="Category" />
+            <span class="input-group-btn"></span>
+            <input type="date" id="min-date" min="1985-02-08" placeholder="Minimum date" />
+            <span class="input-group-btn"></span>
+            <input type="date" id="max-date" min="1985-02-08" placeholder="Maximum date" />
+            <span class="input-group-btn"></span>
+            <select class="select-container">
+                <option value="100">100</option>
+                <option value="200">200</option>
+                <option value="400">400</option>
+                <option value="600">600</option>
+                <option value="800">800</option>
+                <option value="1000">1000</option>
+
+            </select>
+
             </div>
-            <!--
+
+        </div>
+        <!--
                 <input type= "text" id="search" placeholder="" onkeypress="handleKeyPress(event);"/>
                 <img src="images/search-icon.svg" id="search-btn" alt="search button">
 
             -->
-            
-            <p id="tip">Hit enter to search</p>
-            <input type= "text" id="category-search" placeholder="" onkeypress="handleKeyPress(event);"/>
+
+        <p id="tip">Hit enter to search</p>
+    </div>
+    <div id="scrolling-wrapper">
+        <div id="container">
         </div>
-        <div id="scrolling-wrapper">
-            <div id="container">
-            </div>
-        </div>
-        <a href="results.html">Click here to view all results</a>
-<script src="scripts/main.js"></script>
-</div>
+    </div>
+    <a href="results.html">Click here to view all results</a>
+    <script src="scripts/main.js"></script>
+    <script src="scripts/build-database.js"></script>
+    <script src="scripts/handle-user.js"></script>
+    <script src="scripts/ahocorasick.js"></script>
+
 </body>
+
 </html>

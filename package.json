@@ -1,0 +1,31 @@
+{
+  "name": "jeopardy-clue-search",
+  "version": "2.1.0",
+  "description": "Searches Jeopardy clues with the jservice.io API. Uses the Aho-Corasick algorithm to search through the database.",
+  "main": "main.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/MeicoPotato/jeopardy-clue-search.git"
+  },
+  "keywords": [
+    "jeopardy",
+    "javascript",
+    "ahocorasick",
+    "algorithm",
+    "web",
+    "api",
+    "jservice"
+  ],
+  "author": "Meico T. Hsiao",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/MeicoPotato/jeopardy-clue-search/issues"
+  },
+  "homepage": "https://github.com/MeicoPotato/jeopardy-clue-search#readme",
+  "dependencies": {
+    "ahocorasick": "^1.0.2"
+  }
+}
