@@ -13,8 +13,8 @@ html {
   -moz-osx-font-smoothing: grayscale;
   line-height: 1.6;
   height: 100vh;
-  background: -webkit-gradient(linear, left top, left bottom, from(#781F97), to(#ED4FE1));
-  background: linear-gradient(to bottom, #781F97 0%, #ED4FE1 100%);
+  background: -webkit-gradient(linear, left top, left bottom, from(#781f97), to(#ed4fe1));
+  background: linear-gradient(to bottom, #781f97 0%, #ed4fe1 100%);
 }
 
 #scrolling-wrapper {
@@ -23,10 +23,10 @@ html {
 
 h1 {
   text-align: center;
-  padding: 1.5rem 2.5rem;
+  padding: 1.0rem 2.0rem;
   margin: 0 0 2rem 0;
   font-size: 1.5rem;
-  color: #FFFFFF;
+  color: #ffffff;
 }
 
 p {
@@ -35,65 +35,63 @@ p {
   margin: 0;
 }
 
-.container {
-  display: -webkit-box;
-  display: -ms-flexbox;
-  display: flex;
-  -ms-flex-wrap: wrap;
-      flex-wrap: wrap;
+#container {
+  overflow: auto;
+  white-space: nowrap;
+}
+
+#container::-webkit-scrollbar {
+  width: 100vw;
+  background-color: #031174;
+}
+
+#container::-webkit-scrollbar-track {
+  -webkit-box-shadow: inset 0 0 6px #dd9c4a;
+  box-shadow: inset 0 0 6px #dd9c4a;
+  background-color: #031174;
+}
+
+#container::-webkit-scrollbar-thumb {
+  background: #dd9c4a;
 }
 
 .card {
-  font-family: 'News Cycle';
+  width: 17vw;
+  height: 60vh;
+  font-family: "News Cycle";
   margin: 1rem;
   background: #031174;
   -webkit-box-shadow: 2px 4px 25px rgba(0, 0, 0, 0.1);
           box-shadow: 2px 4px 25px rgba(0, 0, 0, 0.1);
-  border-radius: 3px;
-  -webkit-transition: all .2s linear;
-  transition: all .2s linear;
+  -webkit-transition: all 0.2s linear;
+  transition: all 0.2s linear;
+  white-space: normal;
   overflow-y: scroll;
+  display: inline-block;
+  position: relative;
 }
 
 .card:hover {
-  -webkit-box-shadow: 2px 8px 45px #DD9C4A;
-          box-shadow: 2px 8px 45px #DD9C4A;
+  -webkit-box-shadow: 2px 8px 45px #dd9c4a;
+          box-shadow: 2px 8px 45px #dd9c4a;
   -webkit-transform: translate3D(0, -2px, 0);
           transform: translate3D(0, -2px, 0);
 }
 
-@media screen and (min-width: 600px) {
-  .card {
-    -webkit-box-flex: 1;
-        -ms-flex: 1 1 calc(50% - 2rem);
-            flex: 1 1 calc(50% - 2rem);
-  }
+.card::-webkit-scrollbar {
+  width: 0px;
+  background-color: #031174;
 }
 
-@media screen and (min-width: 900px) {
-  .card {
-    -webkit-box-flex: 1;
-        -ms-flex: 1 1 calc(20% - 3rem);
-            flex: 1 1 calc(20% - 3rem);
-  }
-}
-
-/*
-@media screen and (min-width: 900px) {
-    .card {
-      flex: 1 1 calc(33% - 2rem);
-    }
-  }
-  */
 #title {
-  font-family: 'Bangers';
-  color: #DD9C4A;
+  font-family: "Bangers";
+  color: #dd9c4a;
   font-size: 3.5em;
 }
 
 input {
-  font-family: 'News Cycle';
-  background: #DD9C4A;
+  font-family: "News Cycle";
+  background: #dd9c4a;
   width: 20px;
   height: 20px;
   padding: 20px;
@@ -120,8 +118,8 @@ img {
 
 #tip {
   color: #031174;
-  font-family: 'News Cycle';
-  font-size: .8em;
+  font-family: "News Cycle";
+  font-size: 0.8em;
   text-align: left;
   margin-left: 50px;
   visibility: hidden;
@@ -136,11 +134,11 @@ img {
   border-radius: 50%;
   width: 30px;
   height: 30px;
-  border: 4px solid #DD9C4A;
+  border: 4px solid #dd9c4a;
   position: absolute;
   z-index: -1;
-  -webkit-animation: stretch 1.0s 5;
-          animation: stretch 1.0s 5;
+  -webkit-animation: stretch 1s 5;
+          animation: stretch 1s 5;
 }
 
 @-webkit-keyframes stretch {
@@ -167,13 +165,40 @@ img {
   }
 }
 
+#category, #value, #airDate {
+  text-align: left;
+  padding: 0em .5em 0em .5em;
+  font-size: .9vw;
+  color: #dd9c4a;
+  text-transform: uppercase;
+  white-space: normal;
+}
+
 #question {
-  font-size: 1.5vw;
-  color: #FFFFFF;
+  font-size: 1.1vw;
+  color: #ffffff;
   text-transform: uppercase;
 }
 
-#answer {
-  color: #DD9C4A;
+#toggleButton {
+  font-size: 1.5vw;
+  cursor: pointer;
+  font-family: "News Cycle";
+  background-color: #781f97;
+  border: none;
+  color: white;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  transition-duration: 0.3s;
+  -webkit-transition-duration: 0.3s;
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+}
+
+#toggleButton:hover {
+  background-color: #dd9c4a;
 }
 /*# sourceMappingURL=style.css.map */
