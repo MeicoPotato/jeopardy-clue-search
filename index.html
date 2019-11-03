@@ -14,7 +14,7 @@
         <div class="input-group">
             <input type="text" id="search-bar" placeholder="Search from over 150,000 clues"
                 onkeypress="handleKeyPress(event);" />
-            <img src="images/search-icon.svg" id="search-btn" alt="search button" onclick="clickEnter();">
+            <img src="images/search-icon.svg" id="search-btn" alt="search button" onclick="handleKeyPress(event);">
             <span class="input-group-btn"></span>
             <input type="text" id="category-search" placeholder="Category" />
             <span class="input-group-btn"></span>
@@ -22,7 +22,8 @@
             <span class="input-group-btn"></span>
             <input type="date" id="max-date" min="1985-02-08" placeholder="Maximum date" />
             <span class="input-group-btn"></span>
-            <select class="select-container">
+            <select class="select-container" id="difficulty">
+                <option value="All">All</option>
                 <option value="100">100</option>
                 <option value="200">200</option>
                 <option value="400">400</option>
@@ -35,11 +36,6 @@
             </div>
 
         </div>
-        <!--
-                <input type= "text" id="search" placeholder="" onkeypress="handleKeyPress(event);"/>
-                <img src="images/search-icon.svg" id="search-btn" alt="search button">
-
-            -->
 
         <p id="tip">Hit enter to search</p>
     </div>
@@ -47,12 +43,7 @@
         <div id="container">
         </div>
     </div>
-    <a href="results.html">Click here to view all results</a>
     <script src="scripts/main.js"></script>
-    <script src="scripts/build-database.js"></script>
-    <script src="scripts/handle-user.js"></script>
-    <script src="scripts/ahocorasick.js"></script>
-
 </body>
 
 </html>

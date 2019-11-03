@@ -1,30 +1,44 @@
-let test = require('ahocorasick.js');
+async function buildDatabase() {
+    const offsetMax = 156000;
 
-let clues = AhoCorasick.prototype.search;
+    for (let offset = 0; offset <= offsetMax; offset += 100) {
+        getClues(offset).then(offsetData => {
+            offsetData.forEach(clue => {
+                clues.push(clue);
+            });
+        });
+    }
+}
 
-randomCards();
-buildDatabase();
-
-function clickEnter() {
-    let searchInput = document.getElementById("search-bar").value;
-    deleteCards();
-    searchQuestion(searchInput);
+async function getClues(offset) {
+    let response = await fetch(`http://jservice.io/api/clues/?offset=${offset}`);
+    let data = await response.json();
+    return data;
 }
 
 function handleKeyPress(key) {
-    if (key.keyCode == 13) {
-        let searchInput = document.getElementById("search-bar").value;
-        let categoryInput = document.getElementById("category-search").value;
-        let minDateInput = document.getElementById("min-date").value;
-        let maxDateInput = document.getElementById("max-date").value;
-        let difficultyInput = document.getElementById("difficulty").value;
+    let searchInput;
+    let categoryInput;
+    let minDateInput;
+    let maxDateInput;
+    let difficultyInput;
+
+    if (key.keyCode == 13 || key.keyCode == undefined) {
+        minDateInput = document.getElementById("min-date").value;
+        maxDateInput = document.getElementById("max-date").value;
+        searchInput = document.getElementById("search-bar").value;
+        difficultyInput = document.getElementById("difficulty").value;
+
+        if ((document.getElementById("category-search").value)) {
+            categoryInput = document.getElementById("category-search").value;
+        }
 
         let userInput = {
-            search : searchInput,
-            category : categoryInput,
-            minDate : minDateInput,
-            maxDate : maxDateInput,
-            difficulty : difficultyInput
+            search: searchInput,
+            category: categoryInput,
+            minDate: minDateInput,
+            maxDate: maxDateInput,
+            difficulty: difficultyInput
         }
 
         deleteCards();
@@ -32,21 +46,100 @@ function handleKeyPress(key) {
     }
 }
 
-async function searchQuestion(userInputObj) {
-    let formattedSearchInput = userInput.search.toLowerCase().replace(/[^a-zA-Z0-9]/g, "");
-    let formattedCategoryInput = userInput.category.toLowerCase().replace(/[^a-zA-Z0-9]/g, "");
-    let formattedMinDateInput = userInput.minDate.replace(/[^a-zA-Z0-9]/g, "");
-    let formattedMaxDateInput = userInput.maxDate.replace(/[^a-zA-Z0-9]/g, "");
-    let formattedDifficultyInput = userInput.difficulty;
-
+function searchQuestion(userInput) {
     for (let clue of clues) {
-        if (clue.question.toLowerCase().replace(/[^a-zA-Z0-9]/g, "")
-                .includes(formattedSearchInput)) {
+        let validClue = false;
+        let formattedQuestion = clue.question.toLowerCase().replace(/[^a-zA-Z0-9]/g, '');
+        let formattedCategory = clue.category.title.toLowerCase().replace(/[^a-zA-Z0-9]/g, '');
+        let formattedDifficulty = clue.value;
+        let formattedDate;
+        let formattedMinDate;
+        let formattedMaxDate;
+        let formattedSearchInput;
+        let formattedCategoryInput;
+        let formattedDifficultyInput = userInput.difficulty.toLowerCase();
+
+        if (userInput.search) {
+            formattedSearchInput = userInput.search.toLowerCase().replace(/[^a-zA-Z0-9]/g, '');
+
+            if (formattedQuestion.includes(formattedSearchInput)) {
+                validClue = true;
+            }
+        }
+
+
+        if (userInput.category) {
+            formattedCategoryInput = userInput.category.toLowerCase().replace(/[^a-zA-Z0-9]/g, '');
+
+            if ((formattedCategoryInput.includes(formattedCategory)) && (validClue)) {
+                validClue = true;
+            } else {
+                validClue = false;
+            }
+        }
+
+        if ((formattedDifficultyInput != 'all') && (formattedDifficultyInput.includes(formattedDifficulty))) {
+            validClue = true;
+        } else if ((formattedDifficultyInput != 'all') && (!formattedDifficultyInput.includes(formattedDifficulty))) {
+            validClue = false;
+        }
+
+        if (convertTime(clue.airdate)) {
+            formattedDate = convertTime(clue.airdate);
+        }
+
+        if (userInput.minDate) {
+            formattedMinDate = userInput.minDate.replace(/[^a-zA-Z0-9]/g, '');
+        }
+
+        if (userInput.maxDate) {
+            formattedMaxDate = userInput.maxDate.replace(/[^a-zA-Z0-9]/g, '');
+        }
+
+        if ((formattedMinDate) && (formattedMaxDate)) {
+            if (formattedMinDate > formattedMinDate) {
+                let swap = formattedMinDate;
+                formattedMinDate = formattedMaxDate;
+                formattedMaxDate = swap;
+            }
+        }
+
+        if ((formattedMinDate) && (formattedMaxDate)) {
+            if ((formattedDate >= formattedMinDate) && (formattedDate <= formattedMaxDate)) {
+                validClue = true;
+            } else {
+                validClue = false;
+            }
+        } else if ((formattedMinDate) && (!formattedMaxDate)) {
+            if ((formattedDate >= formattedMinDate)) {
+                validClue = true;
+            } else {
+                validClue = false;
+            }
+        } else if (!(formattedMinDate) && (formattedMaxDate)) {
+            if ((formattedDate <= formattedMaxDate)) {
+                validClue = true;
+            } else {
+                validClue = false;
+            }
+        }
+
+        if (validClue) {
             addCard(clue);
         }
+
     }
 }
 
+function convertTime(time) {
+    let date = new Date(time);
+    let day = date.getDate();
+    let year = date.getFullYear();
+    let month = date.getMonth() + 1;
+    let formattedDate = `${year}${month}${day}`;
+
+    return (formattedDate);
+}
 
 function randomCards() {
     getRandomClues().then(data => {
@@ -124,5 +217,6 @@ function deleteCards() {
     });
 }
 
-//http://jservice.io/api/clues/?min_date=1990-01-01&max_date=2016-01-01
-//jeopardy values: 100, 200, 400, 600, 800, 1000
+randomCards();
+buildDatabase();
+let clues = new Array;
