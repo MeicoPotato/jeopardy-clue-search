@@ -1,20 +1,33 @@
-async function buildDatabase() {
-    const offsetMax = 156000;
+/**
+ * Jeopardy! clue search using jservice.io API. Builds a database asynchronously,
+ * allowing for searching while database is still being built.
+ * 
+ * @since 1.0
+ */
 
-    for (let offset = 0; offset <= offsetMax; offset += 100) {
-        getClues(offset).then(offsetData => {
-            offsetData.forEach(clue => {
-                clues.push(clue);
+/**
+ * Builds a data using clues[] array.
+ */
+async function buildDatabase() {
+    async function getData() {
+        const offsetMax = 156000;
+        for (let offset = 0; offset <= offsetMax; offset += 100) {
+            getClues(offset).then(offsetData => {
+                offsetData.forEach(clue => {
+                    clues.push(clue);
+                });
             });
-        });
+        }
+    }
+
+    async function getClues(offset) {
+        let response = await fetch(`http://jservice.io/api/clues/?offset=${offset}`);
+        let data = await response.json();
+        return data.then(Promise.all(response, data));
     }
 }
 
-async function getClues(offset) {
-    let response = await fetch(`http://jservice.io/api/clues/?offset=${offset}`);
-    let data = await response.json();
-    return data;
-}
+
 
 function handleKeyPress(key) {
     let searchInput;
