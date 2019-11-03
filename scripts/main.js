@@ -154,6 +154,11 @@ async function searchQuestion(userInput) {
     }
 }
 
+/**
+ * Converts a time to an integer for easy computation.
+ * 
+ * @param time is the time to be converted.
+ */
 function convertTime(time) {
     let date = new Date(time);
     let day = date.getDate();
@@ -164,6 +169,9 @@ function convertTime(time) {
     return (formattedDate);
 }
 
+/**
+ * Gets random clues and displays them.
+ */
 function randomCards() {
     getRandomClues().then(data => {
         data.forEach(clue => {
@@ -176,12 +184,20 @@ function randomCards() {
     });
 }
 
+/**
+ * Fetches random clues.
+ */
 async function getRandomClues() {
     let response = await fetch("http://jservice.io/api/random/?count=5");
     let data = await response.json();
     return data;
 }
 
+/**
+ * Adds clues. Changes many elements in index.html
+ * 
+ * @param clue is the clue to be added.
+ */
 function addCard(clue) {
     const card = document.createElement("div");
     card.setAttribute("class", "card");
@@ -224,6 +240,11 @@ function addCard(clue) {
     document.getElementById("container").appendChild(card);
 }
 
+/**
+ * Toggles answer display on/off
+ * 
+ * @param clueNumber is the clue to toggle the answer on/off 
+ */
 function toggleAnswer(clueNumber) {
     let ans = document.getElementById(`answer${clueNumber}`);
 
@@ -234,12 +255,19 @@ function toggleAnswer(clueNumber) {
     }
 }
 
+/**
+ * Deletes clues. Needed to update searches.
+ */
 function deleteCards() {
     document.querySelectorAll(".card").forEach(function (c) {
         c.remove();
     });
 }
 
+/**
+ * "Main method". At the time being, I cannot figure out how to use require()
+ * or import for a better organized workplace.
+ */
 randomCards();
 buildDatabase();
 let clues = new Array;
