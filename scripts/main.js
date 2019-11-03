@@ -6,11 +6,13 @@
  */
 
 /**
- * Builds a data using clues[] array.
+ * Builds a data using clues[] array. By using async/await, we can build a database
+ * while search through what we already have.
  */
 async function buildDatabase() {
+    getData();
     async function getData() {
-        const offsetMax = 156000;
+        const offsetMax = 156000; //currently the max offset of the API
         for (let offset = 0; offset <= offsetMax; offset += 100) {
             getClues(offset).then(offsetData => {
                 offsetData.forEach(clue => {
