@@ -8,18 +8,16 @@
 /**
  * Builds a data using clues[] array. By using async/await, we can build a database
  * while search through what we already have.
- */
+*/
+
 async function buildDatabase() {
-    getData();
-    async function getData() {
-        const offsetMax = 156000; //currently the max offset of the API
-        for (let offset = 0; offset <= offsetMax; offset += 100) {
-            getClues(offset).then(offsetData => {
-                offsetData.forEach(clue => {
-                    clues.push(clue);
-                });
+    const offsetMax = 156000; //currently the max offset of the API
+    for (let offset = 0; offset <= offsetMax; offset += 100) {
+        getClues(offset).then(offsetData => {
+            offsetData.forEach(clue => {
+                clues.push(clue);
             });
-        }
+        });
     }
 
     async function getClues(offset) {
@@ -27,10 +25,15 @@ async function buildDatabase() {
         let data = await response.json();
         return data.then(Promise.all(response, data));
     }
+
 }
 
-
-
+/**
+ * Handles user actions, waiting for enter key or clicking on search button.
+ * 
+ * @param key is user input. If user presses the enter key or clicks the search button,
+ * setting up for searchQuestions() begins. 
+ */
 function handleKeyPress(key) {
     let searchInput;
     let categoryInput;
@@ -61,7 +64,12 @@ function handleKeyPress(key) {
     }
 }
 
-function searchQuestion(userInput) {
+/**
+ * Searches through the existing database and compares to check for valid clues.
+ * 
+ * @param userInput is an array of objects, with user search parameters.
+ */
+async function searchQuestion(userInput) {
     for (let clue of clues) {
         let validClue = false;
         let formattedQuestion = clue.question.toLowerCase().replace(/[^a-zA-Z0-9]/g, '');
