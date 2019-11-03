@@ -5,19 +5,32 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Jeopardy! Clue Search</title>
     <link rel="stylesheet" href="styles/style.css">
-
 </head>
 <body>
     <div class="header-container">
         <h1 id="title">Jeopardy! Clue Search</h1>
         <div class="search-container">
-            <input type= "text" id="search" placeholder="" onkeypress="handleKeyPress(event);"/>
-            <img src="images/search-icon.svg" id="search-btn" alt="search button">
+            <div class="input-group">
+                <input type="text" class="form-control input-sm" value="test1" />
+                <span class="input-group-btn" style="width:0px;"></span>
+                <input type="text" class="form-control input-sm" value="test2" style="margin-left:-1px" />
+                <span class="input-group-btn" style="width:0px;"></span>
+                <input type="text" class="form-control input-sm" value="test2" style="margin-left:-2px" />
+            </div>
+            <!--
+                <input type= "text" id="search" placeholder="" onkeypress="handleKeyPress(event);"/>
+                <img src="images/search-icon.svg" id="search-btn" alt="search button">
+
+            -->
+            
             <p id="tip">Hit enter to search</p>
+            <input type= "text" id="category-search" placeholder="" onkeypress="handleKeyPress(event);"/>
         </div>
         <div id="scrolling-wrapper">
-
+            <div id="container">
+            </div>
         </div>
+        <a href="results.html">Click here to view all results</a>
 <script src="scripts/main.js"></script>
 </div>
 </body>
