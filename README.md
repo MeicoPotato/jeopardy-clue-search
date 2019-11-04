@@ -57,9 +57,8 @@ in this application.
 ### index.html and style.scss
 
 A relatively simple main and only page. I created cards and used appropiate colors that
-would stay true to the game show's colors. My ***scrolling-wrapper*** **<div>** allows
-me to scroll horizontally, but not the entire page, allowing the user to scroll through
-clues as they please.
+would stay true to the game show's colors. My ***scrolling-wrapper*** allows me to scroll
+horizontally, but not the entire page, allowing the user to scroll through clues as they please.
 
 The search bar has built in advanced search filters, with category, min date, max date,
 and value. Because dates are bounded and so are the values, I decided to go for
