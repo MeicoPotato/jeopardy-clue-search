@@ -9,8 +9,6 @@
  * Builds a data using clues[] array. By using async/await, we can build a database
  * while search through what we already have.
 */
-
-
 async function buildDatabase() {
     try {
         const OFFSET_MAX = 156000; //currently the max offset of the API
@@ -27,7 +25,7 @@ async function buildDatabase() {
             });
         }
     } catch (error) {
-        return error;
+        console.error(error);
     }
 }
 
@@ -40,6 +38,24 @@ async function getClues(queryLink) {
     }
 }
 
+/**
+ * Gets random clues and displays them.
+ */
+async function randomCards() {
+    try {
+        let randomCluesLink = 'http://jservice.io/api/random';
+        let queryLink = `https://cors-anywhere.herokuapp.com/${randomCluesLink}`;
+
+        getClues(queryLink).then(offsetData => {
+            offsetData.forEach(clue => {
+                clues.push(clue);
+                console.log(clue);
+            });
+        });
+    } catch (error) {
+        console.error(error);
+    }
+}
 
 /**
  * Handles user actions, waiting for enter key or clicking on search button.
@@ -180,30 +196,6 @@ function convertTime(time) {
     let formattedDate = `${year}${month}${day}`;
 
     return (formattedDate);
-}
-
-/**
- * Gets random clues and displays them.
- */
-function randomCards() {
-    getRandomClues().then(data => {
-        data.forEach(clue => {
-            if (clue.question !== "") {
-                addCard(clue);
-            } else {
-                randomCards();
-            }
-        });
-    });
-}
-
-/**
- * Fetches random clues.
- */
-async function getRandomClues() {
-    let response = await fetch("http://jservice.io/api/random/?count=5");
-    let data = await response.json();
-    return data;
 }
 
 /**
