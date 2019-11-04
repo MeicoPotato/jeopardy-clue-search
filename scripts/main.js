@@ -12,20 +12,24 @@
 
 async function buildDatabase() {
     const offsetMax = 156000; //currently the max offset of the API
-    for (let offset = 0; offset <= offsetMax; offset += 100) {
-        getClues(offset).then(offsetData => {
-            offsetData.forEach(clue => {
-                clues.push(clue);
+
+    try {
+        for (let offset = 0; offset <= offsetMax; offset += 100) {
+            getClues(offset).then(offsetData => {
+                offsetData.forEach(clue => {
+                    clues.push(clue);
+                });
             });
-        });
+        }
+    } catch(error) {
+        return error;
     }
 
     async function getClues(offset) {
         let response = await fetch(`http://jservice.io/api/clues/?offset=${offset}`);
         let data = await response.json();
-        return data.then(Promise.all(response, data));
+        return data;
     }
-
 }
 
 /**
@@ -160,7 +164,7 @@ async function searchQuestion(userInput) {
  * @param time is the time to be converted.
  */
 function convertTime(time) {
-    let date = new Date(time);
+    let date = new Date(time); 
     let day = date.getDate();
     let year = date.getFullYear();
     let month = date.getMonth() + 1;
