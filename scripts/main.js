@@ -48,8 +48,7 @@ async function randomCards() {
 
         getClues(queryLink).then(offsetData => {
             offsetData.forEach(clue => {
-                clues.push(clue);
-                console.log(clue);
+                addCard(clue);
             });
         });
     } catch (error) {
