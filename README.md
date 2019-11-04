@@ -26,7 +26,7 @@ and compare, which goes against what I was trying to accomplish in the first pla
 
 Eventually, I settled on attempting the Aho-Corasick algorithm. Because
 I would be able to make one pass through the database, it would be extremely useful
-for this application. The time complexity of this algorithm would be ***O(m)***, where
+for this application. The time complexity of this algorithm would be `O(m)`, where
 ***m*** is the largest string in the database.
 
 This is what I had in mind:
