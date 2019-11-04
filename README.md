@@ -13,7 +13,7 @@ being built.
 My initial plan for this application was to pull the JSON objects and insert
 them into a trie tree by the question value. Then, I would implement a live
 search or autocomplete feature. By using a trie tree, we can search through
-a database with ***O(nm)*** time complexity. However, this implementation
+a database with `O(nm)` time complexity. However, this implementation
 was more difficult than I anticpated. To my understanding, trie trees must
 require exact values and must be prefixes to what you're searching for. That is,
 if you have a string *S* that contains "My dog ate my pasta" and want to search a
