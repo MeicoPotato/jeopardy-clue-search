@@ -11,11 +11,10 @@
 */
 
 async function buildDatabase() {
-    const offsetMax = 156000; //currently the max offset of the API
-    let links = new Array();
-
     try {
-        for (let offset = 0; offset <= offsetMax; offset += 100) {
+        const OFFSET_MAX = 156000; //currently the max offset of the API
+
+        for (let offset = 0; offset <= OFFSET_MAX; offset += 100) {
             getClues(offset).then(offsetData => {
                 offsetData.forEach(clue => {
                     clues.push(clue);
@@ -29,6 +28,10 @@ async function buildDatabase() {
 }
 
 async function getClues(offset) {
+    await new Promise(res => {
+        setTimeout(res, 50);
+    });
+
     let response = await fetch(`http://jservice.io/api/clues/?offset=${offset}`);
     let data = await response.json();
     return data;
