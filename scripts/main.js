@@ -28,11 +28,7 @@ async function buildDatabase() {
 }
 
 async function getClues(offset) {
-    await new Promise(res => {
-        setTimeout(res, 50);
-    });
-
-    let response = await fetch(`http://jservice.io/api/clues/?offset=${offset}`);
+    let response = await fetch(`https://jservice.io/api/clues/?offset=${offset}`);
     let data = await response.json();
     return data;
 }
