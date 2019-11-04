@@ -1,3 +1,9 @@
+/**
+ * Fetches an API link to get data.
+ * 
+ * @param {type} queryLink is the link to request
+ */
+
 async function getClues(queryLink) {
     try {
         let response = await fetch(queryLink);
@@ -26,9 +32,9 @@ async function randomCards() {
 }
 
 /**
- * Adds clues. Changes many elements in index.html
+ * Adds a clue to the page in a card display.
  * 
- * @param clue is the clue to be added.
+ * @param {type} clue is the clue to be added.
  */
 function addCard(clue) {
     const card = document.createElement("div");
@@ -82,9 +88,10 @@ function deleteCards() {
 }
 
 /**
- * Toggles answer display on/off
+ * Toggles clue answer on/off.
  * 
- * @param clueNumber is the clue to toggle the answer on/off 
+ * @param {var} clueNumber is the clue to hide.
+ * @bug CURRENTLY DOES NOT WORK!
  */
 function toggleAnswer(clueNumber) {
     let ans = document.getElementById(`answer${clueNumber}`);
@@ -217,9 +224,6 @@ function convertTime(time) {
 
 /**
  * Handles user actions, waiting for enter key or clicking on search button.
- * 
- * @param key is user input. If user presses the enter key or clicks the search button,
- * setting up for searchQuestions() begins. 
  */
 function createUserObj() {
     let userInput = {
