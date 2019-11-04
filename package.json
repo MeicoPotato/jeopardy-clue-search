@@ -26,6 +26,8 @@
   },
   "homepage": "https://github.com/MeicoPotato/jeopardy-clue-search#readme",
   "dependencies": {
-    "ahocorasick": "^1.0.2"
+    "ahocorasick": "^1.0.2",
+    "cors-anywhere": "^0.4.1",
+    "uniqid": "^5.0.3"
   }
 }

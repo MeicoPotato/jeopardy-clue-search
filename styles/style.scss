@@ -53,7 +53,6 @@ html {
   background: #000000;
 }
 
-
 .select-container {
 	font-size: 1vw;
 	font-family: "News Cycle";
@@ -169,17 +168,6 @@ img {
   position: absolute;
   opacity: 0;
   transition: opacity 2s;
-}
-
-@keyframes stretch {
-  0% {
-    transform: scale(1);
-  }
-
-  100% {
-    transform: scale(2);
-    opacity: 0;
-  }
 }
 
 #category, #value, #airDate {
