@@ -43,7 +43,7 @@ async function getClues(queryLink) {
  */
 async function randomCards() {
     try {
-        let randomCluesLink = 'http://jservice.io/api/random';
+        let randomCluesLink = 'http://jservice.io/api/random/?count=5';
         let queryLink = `https://cors-anywhere.herokuapp.com/${randomCluesLink}`;
 
         getClues(queryLink).then(offsetData => {
