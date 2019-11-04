@@ -31,7 +31,7 @@ for this application. The time complexity of this algorithm would be `O(m)`, whe
 
 This is what I had in mind:
 * Fetch the API using ***offset*** from the provided API to iterate through the data.
-* Build an Aho-Corasick database using ***[questions]*** from the JSON data.
+* Build an Aho-Corasick database using `[questions]` from the JSON data.
 * Implement a live search that changes the clues on screen as the user types.
 * Implement a fuzzy string matching algorithm using the Levenshtein distance. This
 allows for further and faster result searching.
@@ -39,7 +39,7 @@ allows for further and faster result searching.
 ### main.js
 
 My main method script file. Uses require() to load other modules. I have one array,
-called ***clueDatabse*** that contains an array of clues. Then, I can use the array
+called `clueDatabse` that contains an array of clues. Then, I can use the array
 to compare attributes.
 
 
@@ -57,7 +57,7 @@ in this application.
 ### index.html and style.scss
 
 A relatively simple main and only page. I created cards and used appropiate colors that
-would stay true to the game show's colors. My ***scrolling-wrapper*** allows me to scroll
+would stay true to the game show's colors. My `scrolling-wrapper` allows me to scroll
 horizontally, but not the entire page, allowing the user to scroll through clues as they please.
 
 The search bar has built in advanced search filters, with category, min date, max date,
@@ -66,9 +66,9 @@ a date selector and drop menu for values (there aren't many different values).
 
 ### Images and SVG
 
-I only have two files in my ***images*** directory, ***background.png***, which I stole
-from Google Images (I'm kidding, I checked usage rights), and ***search-icon.svg***.
-***search-icon.svg*** was created by me with SVG-edit. I did not know what SVG files were
+I only have two files in my `images` directory, `background.png`, which I stole
+from Google Images (I'm kidding, I checked usage rights), and `search-icon.svg`.
+`search-icon.svg` was created by me with SVG-edit. I did not know what SVG files were
 before this project, but am happy to learn of its applications. Because it's vector based,
 this allows for better integration in web applications. Although my app only uses it for
 a search icon/button, it is something that I will be using in the future from now on.
