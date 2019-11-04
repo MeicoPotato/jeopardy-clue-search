@@ -1,5 +1,7 @@
 # jeopardy-clue-search
 
+![Demo](demo/demo.gif)
+
 # Introduction
 
 This is my attempt at the Jeopardy! Clue Search app for Capital One MindSumo challenge.
