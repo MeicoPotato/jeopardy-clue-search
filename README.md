@@ -74,15 +74,8 @@ a search icon/button, it is something that I will be using in the future from no
 
 ### Conclusion
 
-My version of the Jeopardy! clue search, using the jservice.io API is far from perfect.
-Notably, I have one script file that executes for the entire application, including a global
-array and large .js file that could be split into sensible script files. I had a difficult
-time understanding ***require()*** and import, which led me to the one script file that I
-have now. As this was my first true web application, I found myself reading documentation
-from MDN and planning things out by hand.
-
-I, perhaps, spent too much time with styling and making my application look pleasant to the
-user. I am satisfied with what I have accomplished with the front-end portion of my web app,
-but am not satisfied with the back-end, as it could be improved. However, I have learned
-a significant amount throughout this project, and am looking forward to learning more and
-improving my skills.
+This is my version of a clue searching web app from the game show Jeopardy! Although it's
+not perfect, this was my first real web project and I learned a significant amount throughout
+the process, such as how to request APIs and common issues associated with it, how to handle
+JSON objects, and the JavaScript, CSS, and HTML languages on their own. If I were to redo this
+web app, I would try to minimize API calling bugs, and create a proper search algorithm.
