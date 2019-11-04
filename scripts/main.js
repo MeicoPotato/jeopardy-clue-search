@@ -10,12 +10,16 @@
  * while search through what we already have.
 */
 
+
 async function buildDatabase() {
     try {
         const OFFSET_MAX = 156000; //currently the max offset of the API
 
         for (let offset = 0; offset <= OFFSET_MAX; offset += 100) {
-            getClues(offset).then(offsetData => {
+            let jServiceLink = `http://jservice.io/api/clues/?offset=${offset}`;
+            let queryLink = `https://cors-anywhere.herokuapp.com/${jServiceLink}`;
+
+            getClues(queryLink).then(offsetData => {
                 offsetData.forEach(clue => {
                     clues.push(clue);
                     console.log(clue);
@@ -27,11 +31,15 @@ async function buildDatabase() {
     }
 }
 
-async function getClues(offset) {
-    let response = await fetch(`https://jservice.io/api/clues/?offset=${offset}`);
-    let data = await response.json();
-    return data;
+async function getClues(queryLink) {
+    try {
+        let response = await fetch(queryLink);
+        return await response.json();
+    } catch (error) {
+        console.error(error);
+    }
 }
+
 
 /**
  * Handles user actions, waiting for enter key or clicking on search button.
