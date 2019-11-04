@@ -36,16 +36,21 @@ allows for further and faster result searching.
 
 ### main.js
 
-I had a difficult time getting require() or import to work. As a result, main.js is
-my only script file. This is, unfortunately, not a good implementation. I am using
-one global array ***clues[]*** that contains clue objects that is created by my
-***buildDatabase()*** function. I also have two function calls in the global scope,
-***randomCards()***, which gets five random clues and displays it on the screen, and
-***buildDatabase()***, which starts my database collection.
+My main method script file. Uses require() to load other modules. I have one array,
+called ***clueDatabse*** that contains an array of clues. Then, I can use the array
+to compare attributes.
 
-It is by no means a great implementation. However, by using async/await, this app allows
-the user to search with the existing data from the database ***clues[]***, while still
-adding more to the database.
+
+### buildDatabase.js
+
+Builds a database of clues. Uses async/await to allow the user to search whilst the
+database is still being built.
+
+### handleUser.js
+
+Handles user inputs, adds/removes clues from the page. Contains the bulk of the scripting
+portion of this web application. Currently, button toggling to show/hide answer is a bug
+in this application.
 
 ### index.html and style.scss
 
